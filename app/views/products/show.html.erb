@@ -1,0 +1,52 @@
+<h3><%= @product.name %></h3>
+<ul>
+INR <%= @product.price %>
+<p><%=@product.description%></p>
+
+<% if user_signed_in? %>
+<%= link_to "/line_items/add?product_id=#{@product.id}", class: "btn btn-info" do %>
+<i class= "glyphicon glyphicon-plus"></i>Add to cart
+<% end %>
+
+<% else %>
+<p> Login to add to cart</p>
+<% end %>
+</ul>
+
+
+<% if user_signed_in? && current_user.is_admin %>
+<small><%= link_to "edit", "/products/#{@product.id}/edit"%>| 
+<%= link_to "destroy", @product, data: { method: :delete, confirm:"Are you sure you want to delete"}%></small> <br>
+<% end %>
+<%= link_to "List Products","/products"%>
+
+<h3> Reviews</h3>
+<ul>
+<% @product.reviews.each do |review| %>
+<li><%= review.rating %> - <%= review.body %> by <%= review.user.email %> | 
+<% if user_signed_in? && (review.user_id==current_user.id || current_user.is_admin) %>
+<%= link_to "Remove",review, method: :delete,data: {confirm: "ru sure to remove"} %>
+<% end %>
+<% end %>
+</li>
+</ul>
+
+
+
+
+<h3> Add Review</h3>
+<%= form_for Review.new do |f| %>
+<label><Rating></label>
+<%= f.radio_button :rating, 1 %> 1
+<%= f.radio_button :rating, 2 %> 2
+<%= f.radio_button :rating, 3 %> 3
+<%= f.radio_button :rating, 4 %> 4
+<%= f.radio_button :rating, 5 %> 5
+<br/>
+<%= f.hidden_field :product_id, value: @product.id %>
+<label> Body </label>
+<%= f.text_area :body %>
+
+<br/>
+<%= f.submit %>
+<% end %>

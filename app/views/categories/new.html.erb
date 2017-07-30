@@ -1,0 +1,25 @@
+	<div class="row">
+	<div class="col-md-7">
+		<h2>Add category</h2>
+		<%= form_for @category do |f| %>
+		<% if @category.errors.any? %>
+		<div class="alert alert-danger">
+		<h3>these errors prohibited to form from begin saved: </h3>
+		<ul>
+		<% @category.errors.full_messages.each do |msg| %>
+		<li> <%= msg %></li>
+		<% end %>
+		</ul>
+		</div>
+		<% end %>
+		<div class="form-group">
+		<%= f.label :name %><br/>
+		<%=f.text_field :name,class: "form-control" %><br/>
+		</div>
+		<%= f.submit "Submit", class: "btn btn-primary" %>
+		<% end %>
+	</div>
+	<div class="col-md-5">
+	</div>
+	</div>
+<%= link_to "List categories", "/categories", class:"btn btn-default" %>

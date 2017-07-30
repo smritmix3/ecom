@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Ecomm</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <script src="/js/responsiveslides.min.js"></script>
+   <script>
+    $(function () {
+      $("#slider").responsiveSlides({
+      	auto: true,
+      	speed: 500,
+        namespace: "callbacks",
+        pager: true,
+      });
+    });
+  </script>
+
+<script>
+// Can also be used with $(document).ready()
+$(window).load(function() {
+  $('.flexslider').flexslider({
+    animation: "slide",
+    controlNav: "thumbnails"
+  });
+});
+</script>
+
+
+	<!---//pop-up-box---->
+	 <script>
+		$(document).ready(function() {
+		$('.popup-with-zoom-anim').magnificPopup({
+			type: 'inline',
+			fixedContentPos: false,
+			fixedBgPos: true,
+			overflowY: 'auto',
+			closeBtnInside: true,
+			preloader: false,
+			midClick: true,
+			removalDelay: 300,
+			mainClass: 'my-mfp-zoom-in'
+		});
+																		
+		});
+</script>	
+
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+<div class="container">
+	<%= render '/layouts/nav' %>
+	<% if notice %>
+		<div class="alert alert-success">
+		  <%= notice %>
+		</div>
+	<% end %>
+
+	<%= alert %>
+
+	<%= yield %>
+	<!---->		
+
+<hr>
+	<!--footer-->
+<div class="footer">
+	<div class="footer-bottom">
+		<div class="container">
+				<div class="col-md-4 footer-bottom-cate">
+					<h6>Top Categories</h6>
+					<ul>
+						<% Category.limit(5).each do |category| %>
+							<li><%= link_to category.name, category %></li>
+						<% end %>
+					</ul>
+				</div>
+				<div class="col-md-4 footer-bottom-cate">
+					<h6>Feature Projects</h6>
+					<ul>
+						<% Product.limit(5).each do |product| %>
+							<li><%= link_to product.name, product %></li>
+						<% end %>
+					</ul>
+				</div>
+				
+				<div class="col-md-4 footer-bottom-cate cate-bottom">
+					<h6>Our Address</h6>
+					<ul>
+						<li>Aliquam metus  dui. </li>
+						<li>orci, ornareidquet</li>
+						<li> ut,DUI.</li>
+						<li>nisi, dignissim</li>
+						<li class="phone">PH : 6985792466</li>
+					</ul>
+				</div>
+				<div class="clearfix"> </div>
+				<p class="footer-class"> © 2016 DCT Academy / GSSSITEW. All Rights Reserved  </p>
+			</div>
+	</div>
+</div>
+	
+</div>
+
+</body>
+</html>

@@ -1,0 +1,14 @@
+<h2><%= @category.name %></h2>
+<p> there are totally <%= @products.length %> products.</p>
+
+<ul>
+   <% @products.each do |product| %>
+   	<li><%= product.name %> - <%=product.price %></li>
+   	<% end %>
+   	</ul>
+   	<% if user_signed_in? && current_user.is_admin %>
+   	<small><%= link_to "edit", "/categories/#{@category.id}/edit" %>
+    </small> | 
+    <%= link_to "destroy", @category, data: {method: :delete,confirm: "are you sure"} %> <br/>
+    <% end %>
+   	<%= link_to "List categories", "/categories" %>

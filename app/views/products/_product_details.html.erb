@@ -1,0 +1,93 @@
+<div class="single">
+
+<div class="container">
+<div class="col-md-12">
+	<div class="col-md-5 grid">		
+		<div class="flexslider">
+			  <ul class="slides">
+			    <li data-thumb="/images/si.jpg">
+			        <div class="thumb-image"> <img src="/images/si.jpg" data-imagezoom="true" class="img-responsive"> </div>
+			    </li>
+			    <li data-thumb="/images/si1.jpg">
+			         <div class="thumb-image"> <img src="/images/si1.jpg" data-imagezoom="true" class="img-responsive"> </div>
+			    </li>
+			    <li data-thumb="/images/si2.jpg">
+			       <div class="thumb-image"> <img src="/images/si2.jpg" data-imagezoom="true" class="img-responsive"> </div>
+			    </li> 
+			  </ul>
+		</div>
+	</div>	
+<div class="col-md-7 single-top-in">
+						<div class="single-para simpleCart_shelfItem">
+							<h1><%= @product.name %></h1>
+							<p><%= @product.description %></p>
+							<div class="star-on">
+								
+								<div class="review">
+									<a href="#"> <%= @product.reviews.size %> </a>/
+									<a href="#">  Write a review</a>
+								</div>
+							<div class="clearfix"> </div>
+							</div>
+							
+								<label  class="add-to item_price">INR <%= @product.price %></label>
+							
+							<div class="available">
+								<h6>Available Options :</h6>
+								<ul>
+									
+								Size : <select>
+									<option>Large</option>
+									<option>Medium</option>
+									<option>small</option>
+
+								</select>
+								
+							</ul>
+						</div>
+						</div>
+					</div>
+
+
+<% if user_signed_in? %>
+	
+	<%= link_to  "/line_items/add?product_id=#{@product.id}", class: "btn btn-info pull-right" do %>
+		 <i class="glyphicon glyphicon-plus"></i> Add to cart
+	<% end %>
+
+
+<% else %>
+	<p>Login to add to cart</p>
+<% end %>
+
+<% if user_signed_in? && current_user.is_admin %>
+	<%= link_to "edit", "/products/#{@product.id}/edit" %>
+<% end %>
+
+			<div class="clearfix"> </div>
+			<div class="content-top1">
+				
+
+			<% Product.order("RANDOM()").limit(3).each do |product| %>	
+			<div class="col-md-4 col-md3">
+					<div class="col-md1 simpleCart_shelfItem">
+						<a href="/products/<%= product.id %>">
+							<img class="img-responsive" src="/images/pi7.png" alt="" />
+						</a>
+						<h3><a href="<%= product.id %>"><%= product.name %></a></h3>
+						<div class="price">
+								<h5 class="item_price">INR <%= product.price %></h5>
+								<a href="/line_items/add?product_id=<%= product.id %>"">Add To Cart</a>
+								<div class="clearfix"> </div>
+						</div>
+						
+					</div>
+				</div>	
+			<% end %>
+			
+			<div class="clearfix"> </div>
+			</div>		
+</div>
+
+				
+		

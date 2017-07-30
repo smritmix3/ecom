@@ -1,0 +1,31 @@
+<!--content-->
+<div class="content">
+	<div class="container">
+		<div class="content-top">
+			<div class="content-top1">
+			
+			<% Product.all.each do |product| %>		
+			<div class="col-md-3 col-md2">
+					<div class="col-md1 simpleCart_shelfItem">
+						<a href="/products/<%= product.id %>">
+							<img class="img-responsive" src="/images/pi2.png" alt="" />
+						</a>
+						<h3><a href="/products/<%= product.id %>"><%= product.name %></a></h3>
+						<div class="price">
+								<h5 class="item_price">INR <%= product.price %></h5>
+								<a href="/line_items/add?product_id=<%= product.id %>" class="btn btn-warning">Add To Cart</a>
+								<div class="clearfix"> </div>
+						</div>
+						
+					</div>
+				</div>	
+			<% end %>
+						
+					</div>
+				</div>	
+			<div class="clearfix"> </div>
+			</div>	
+		</div>
+	</div>
+</div>
+<!--//content-->

@@ -1,0 +1,17 @@
+<h2>edit category</h2>
+<%= form_for @category do |f| %>
+<% if @category.errors.any? %>
+<div class="error" style="color: red">
+<h3>these errors prohibited to form from begin saved: </h3>
+<ul>
+<% @category.errors.full_messages.each do |msg| %>
+<li> <%= msg %></li>
+<% end %>
+</ul>
+</div>
+<% end %>
+<%= f.label :name %><br/>
+<%=f.text_field :name %><br/>
+<%= f.submit %>
+<% end %>
+<%= link_to "List categories", "/categories" %>

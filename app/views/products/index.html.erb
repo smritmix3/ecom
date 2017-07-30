@@ -1,0 +1,11 @@
+<%=render '/products/banner' %>
+
+<h1>listing products</h1>
+<p>Total Products : <%= @products.size %></p>
+<%=render '/products/content' %>
+
+<% if  user_signed_in? && current_user.is_admin %>
+<%= link_to "add products",new_product_path %>
+<% end %>
+
+

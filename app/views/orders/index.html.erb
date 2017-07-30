@@ -1,0 +1,57 @@
+<div class="row">
+    <div class="page-header">
+        <h2>Your Orders</h2>
+    </div>
+
+</div>
+
+<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+
+
+    <% @orders.each do |order| %>
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingOne">
+      <h4 class="panel-title">
+        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#order_<%= order.id %>" aria-expanded="true" aria-controls="collapseOne">
+          <span class="pull-left"><%= order.order_number %></span>
+          <span class="pull-right"><%= order.order_date.strftime("%A, %d %B %Y ") %></span>
+          <br/>
+        </a>
+      </h4>
+    </div>
+
+    <div id="order_<%= order.id %>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+      <div class="panel-body">
+       <table class="table">
+                    <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Description</th>
+                                <th>Category</th>
+                                <th>Price</th>
+
+
+                            </tr>
+                    </thead>
+
+                    <tbody>
+                            <% order.order_line_items.each do |line_item| %>
+                                <tr>
+                                    <td><%= link_to line_item.product.name,"/products/#{line_item.product.id}" %>
+                                    </td>
+
+                                     <td><%= line_item.product.description %></td>
+                                     <td><%= line_item.product.category.name %></td>
+                                    <td><%= line_item.price %></td>
+
+                                </tr>
+                            <% end %>
+                    </tbody>
+       </table>
+
+       <b>Total : INR <%= order.order_line_items.sum(:price) %></b>
+      </div>
+    </div>
+  </div>
+  <% end %>
+</div>

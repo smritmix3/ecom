@@ -1,0 +1,32 @@
+
+<%notice%>
+
+<h2>Add Product</h2>
+<%= form_for @product do |f| %>
+
+<% if @product.errors.any? %>
+<div class="error" style="color: red">
+<h3>These errors prohibited the form from being saved:</h3>
+<ul>
+<% @product.errors.full_messages.each do |msg| %>
+<li><%= msg %></li>
+<% end %>
+</ul>
+</div>
+<% end %>
+
+<%= f.label :name%><br/>
+<%= f.text_field :name %><br/>
+
+<%= f.label :price%><br/>
+<%= f.text_field :price%><br/>
+
+<%= f.label :description%><br/>
+<%= f.text_area :description %><br/>
+<%= f.label :category_id%><br/>
+
+<%= f.collection_select :category_id, Category.all, :id, :name, prompt: "select Category"%>
+<%= f.submit "Create",class: "btn btn-lg btn-primary" %>
+<% end %>
+
+<%= link_to "List products","/products"%>
